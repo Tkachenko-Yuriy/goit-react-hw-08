@@ -22,7 +22,6 @@ export default function UserMenu() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
-
   return (
     <div style={styles.container}>
       <span style={styles.name}>

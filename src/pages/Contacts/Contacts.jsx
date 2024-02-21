@@ -18,9 +18,7 @@ export default function Contacts() {
   }, [dispatch]);
 
   const contacts = useSelector(selectContacts);
-  console.log(contacts);
   const filter = useSelector(selectFilter);
-  console.log(filter);
 
   const handleDelete = (id) => {
     dispatch(deleteContact(id));
@@ -30,10 +28,10 @@ export default function Contacts() {
     dispatch(setFilter(value));
   };
 
-  // const filteredContacts = contacts.filter((contact) => {
-  //   const normalizeFilter = filter.toLowerCase();
-  //   return contact.name.toLowerCase().includes(normalizeFilter);
-  // });
+  const filteredContacts = contacts.filter((contact) => {
+    const normalizeFilter = filter.toLowerCase();
+    return contact.name.toLowerCase().includes(normalizeFilter) || contact.number.includes(normalizeFilter);
+  });
 
   const handleAddNewContact = (values) => {
     const uniqueContactName = contacts.some(
@@ -61,8 +59,8 @@ export default function Contacts() {
       <Toaster />
       <Title text="Phonebook"></Title>
       <ContactForm onChange={handleAddNewContact} />
-      <SearchBox label="Find contacts by name" onChange={handleFilterChange} />
-      <ContactList items={contacts} onClick={handleDelete} />
+      <SearchBox label="Find contacts by name or phone number" onChange={handleFilterChange} />
+      <ContactList items={filteredContacts} onClick={handleDelete} />
     </div>
   );
 }
