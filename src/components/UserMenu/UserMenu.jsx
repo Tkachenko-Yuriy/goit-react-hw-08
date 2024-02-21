@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectUserName } from "../../redux/auth/auth-selectors";
+import { selectUser } from "../../redux/auth/auth-selectors";
 import { FaUserTie } from "react-icons/fa";
 import { logOut } from "../../redux/auth/auth-operations";
 
@@ -20,13 +20,13 @@ const styles = {
 
 export default function UserMenu() {
   const dispatch = useDispatch();
-  const name = useSelector(selectUserName);
-  console.log(name);
+  const user = useSelector(selectUser);
+
 
   return (
     <div style={styles.container}>
       <span style={styles.name}>
-        Hello, {name}
+        Hello, {user.name}
         <FaUserTie style={styles.avatar} />
       </span>
       <button type="button" onClick={() => dispatch(logOut())}>

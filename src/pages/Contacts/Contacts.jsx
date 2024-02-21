@@ -1,14 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchContacts } from "../../redux/contacts/operations";
-import ContactList from "../../components/ContactList/ContactList/ContactList";
 import toast, { Toaster } from "react-hot-toast";
 import { addContact, deleteContact } from "../../redux/contacts/operations";
-import { setFilter } from "../../redux/contacts/filterSlice";
 import { selectContacts, selectFilter } from "../../redux/contacts/selectors";
+import { setFilter } from "../../redux/contacts/filterSlice";
 import Title from "../../components/Title/Title";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import SearchBox from "../../components/SearchForm/SearchBox";
+import ContactList from "../../components/ContactList/ContactList/ContactList";
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -27,7 +27,6 @@ export default function Contacts() {
   };
 
   const handleFilterChange = (value) => {
-    console.log(value);
     dispatch(setFilter(value));
   };
 
@@ -37,7 +36,6 @@ export default function Contacts() {
   // });
 
   const handleAddNewContact = (values) => {
-    console.log(values);
     const uniqueContactName = contacts.some(
       (contact) => contact.name.toLowerCase() === values.name.toLowerCase()
     );
