@@ -1,10 +1,10 @@
+import Fuse from "fuse.js";
+import { useState,useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { fetchContacts } from "../../redux/contacts/operations";
 import toast, { Toaster } from "react-hot-toast";
+import { fetchContacts } from "../../redux/contacts/operations";
 import { addContact, deleteContact } from "../../redux/contacts/operations";
-import { selectContacts, selectFilter } from "../../redux/contacts/selectors";
-import { setFilter } from "../../redux/contacts/filterSlice";
+import { selectContacts } from "../../redux/contacts/selectors";
 import Title from "../../components/Title/Title";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import SearchBox from "../../components/SearchForm/SearchBox";
@@ -18,20 +18,24 @@ export default function Contacts() {
   }, [dispatch]);
 
   const contacts = useSelector(selectContacts);
-  const filter = useSelector(selectFilter);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleDelete = (id) => {
     dispatch(deleteContact(id));
   };
 
   const handleFilterChange = (value) => {
-    dispatch(setFilter(value));
+    setSearchTerm(value);
   };
 
-  const filteredContacts = contacts.filter((contact) => {
-    const normalizeFilter = filter.toLowerCase();
-    return contact.name.toLowerCase().includes(normalizeFilter) || contact.number.includes(normalizeFilter);
-  });
+  const options = {
+    keys: ["name", "number"],
+  };
+  const fuse = new Fuse(contacts, options);
+  const searchResults = fuse.search(searchTerm);
+  const filteredContacts = searchTerm
+    ? searchResults.map((result) => result.item)
+    : contacts;
 
   const handleAddNewContact = (values) => {
     const uniqueContactName = contacts.some(
@@ -59,7 +63,10 @@ export default function Contacts() {
       <Toaster />
       <Title text="Phonebook"></Title>
       <ContactForm onChange={handleAddNewContact} />
-      <SearchBox label="Find contacts by name or phone number" onChange={handleFilterChange} />
+      <SearchBox
+        label="Find contacts by name or phone number"
+        onChange={handleFilterChange}
+      />
       <ContactList items={filteredContacts} onClick={handleDelete} />
     </div>
   );
