@@ -1,5 +1,5 @@
 import Modal from "react-modal";
-import Button from "../Button/Button";
+import Button from "../../Button/Button";
 import css from "./DeleteContactModal.module.css";
 
 Modal.setAppElement("#root");
@@ -36,8 +36,12 @@ export default function DeleteContactModal({
           Are you sure you want to delete this contact?
         </p>
         <div className={css.buttons}>
-          <Button text="Delete" type="button" onClick={onConfirmDelete} />
-          <Button text="Cancel" type="button" onClick={onClose} />
+          <Button type="button" onClick={onConfirmDelete}>
+            Delete
+          </Button>
+          <Button type="button" onClick={onClose}>
+            Cancel
+          </Button>
         </div>
       </div>
     </Modal>

@@ -57,7 +57,7 @@ export default function LoginForm() {
           />
           <ErrorMessage name="password" as="span" />
         </div>
-        <Button text="Log in" type="submit" />
+        <Button type="submit">Log in</Button>
       </Form>
     </Formik>
   );

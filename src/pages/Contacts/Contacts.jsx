@@ -3,7 +3,11 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import { fetchContacts } from "../../redux/contacts/operations";
-import { addContact, deleteContact } from "../../redux/contacts/operations";
+import {
+  addContact,
+  deleteContact,
+  updateContact,
+} from "../../redux/contacts/operations";
 import { selectContacts } from "../../redux/contacts/selectors";
 import Title from "../../components/Title/Title";
 import ContactForm from "../../components/ContactForm/ContactForm";
@@ -24,12 +28,18 @@ export default function Contacts() {
     dispatch(deleteContact(id));
   };
 
+  const handleEdit = (id, updates) => {
+    dispatch(updateContact(id, updates));
+  };
+
   const handleFilterChange = (value) => {
     setSearchTerm(value);
   };
 
   const options = {
+    includeScore: true,
     keys: ["name", "number"],
+    threshold: 0,
   };
   const fuse = new Fuse(contacts, options);
   const searchResults = fuse.search(searchTerm);
@@ -67,7 +77,11 @@ export default function Contacts() {
         label="Find contacts by name or phone number"
         onChange={handleFilterChange}
       />
-      <ContactList items={filteredContacts} onClick={handleDelete} />
+      <ContactList
+        items={filteredContacts}
+        onDeleteBtnClick={handleDelete}
+        onEditBtnClick={handleEdit}
+      />
     </div>
   );
 }

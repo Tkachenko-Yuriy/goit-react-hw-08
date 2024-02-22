@@ -1,21 +1,41 @@
 import { useState } from "react";
-import DeleteContactModal from "../../Modal/DeleteContactModal";
+import { RiEdit2Fill } from "react-icons/ri";
+import { MdDelete } from "react-icons/md";
+import DeleteContactModal from "../../Modal/DeleteContactModal/DeleteContactModal";
+import EditContactModal from "../../Modal/EditContactModal/EditContactModal";
 import Contact from "../Contact/Contact";
 import Button from "../../Button/Button";
 import css from "./ContactList.module.css";
 
-export default function ContactList({ items, onClick }) {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+export default function ContactList({
+  items,
+  onDeleteBtnClick,
+  onEditBtnClick,
+}) {
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [contactIdToDelete, setContactIdToDelete] = useState(null);
+  const [contactToEdit, setContactToEdit] = useState(null);
 
   const handleDelete = (id) => {
     setContactIdToDelete(id);
-    setModalIsOpen(true);
+    setDeleteModalIsOpen(true);
+  };
+
+  const handleEdit = (contact) => {
+    setContactToEdit(contact);
+    setEditModalIsOpen(true);
   };
 
   const confirmDelete = () => {
-    onClick(contactIdToDelete);
-    setModalIsOpen(false);
+    onDeleteBtnClick(contactIdToDelete);
+    setDeleteModalIsOpen(false);
+  };
+
+  const confirmEdit = (contact) => {
+    const { id, name, number } = contact;
+    onEditBtnClick({ id, updates: { name, number } });
+    setEditModalIsOpen(false);
   };
 
   return (
@@ -25,19 +45,31 @@ export default function ContactList({ items, onClick }) {
           <li key={id} className={css.item}>
             <Contact name={name} phone={number}>
               <Button
-                text="Delete"
                 type="button"
-                onClick={() => handleDelete(id)}
-              />
+                onClick={() => handleEdit({ id, name, number })}
+              >
+                <RiEdit2Fill />
+              </Button>
+              <Button type="button" onClick={() => handleDelete(id)}>
+                <MdDelete />
+              </Button>
             </Contact>
           </li>
         ))}
       </ul>
-      {modalIsOpen && (
+      {deleteModalIsOpen && (
         <DeleteContactModal
-          isOpen={modalIsOpen}
-          onClose={() => setModalIsOpen(false)}
+          isOpen={deleteModalIsOpen}
+          onClose={() => setDeleteModalIsOpen(false)}
           onConfirmDelete={confirmDelete}
+        />
+      )}
+      {editModalIsOpen && (
+        <EditContactModal
+          isOpen={editModalIsOpen}
+          onClose={() => setEditModalIsOpen(false)}
+          contact={contactToEdit}
+          onConfirmEdit={confirmEdit}
         />
       )}
     </div>

@@ -75,7 +75,7 @@ export default function RegisterForm() {
           />
           <ErrorMessage name="password" as="span" />
         </div>
-        <Button text="Register" type="submit" />
+        <Button type="submit">Register</Button>
       </Form>
     </Formik>
   );

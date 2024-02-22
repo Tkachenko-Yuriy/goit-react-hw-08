@@ -56,7 +56,7 @@ export default function ContactFotm({ onChange }) {
           />
           <ErrorMessage name="number" as="span" />
         </div>
-        <Button text="Submit" type="submit" />
+        <Button type="submit">Submit</Button>
       </Form>
     </Formik>
   );
