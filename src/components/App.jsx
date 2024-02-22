@@ -1,11 +1,11 @@
 import { useEffect, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "./Layout/Layout";
-import { useDispatch } from 'react-redux';
-import { PrivateRoute } from './PrivateRoute';
-import { RestrictedRoute } from './RestrictedRoute';
-import { refreshUser } from '../redux/auth/auth-operations';
-import { useAuth } from '../components/hooks';
+import { useDispatch } from "react-redux";
+import { PrivateRoute } from "./PrivateRoute";
+import { RestrictedRoute } from "./RestrictedRoute";
+import { refreshUser } from "../redux/auth/auth-operations";
+import { useAuth } from "../components/hooks";
 
 const HomePage = lazy(() => import("../pages/Home/Home"));
 const ContactsPage = lazy(() => import("../pages/Contacts/Contacts"));
@@ -50,4 +50,3 @@ export default function App() {
     </Routes>
   );
 }
-

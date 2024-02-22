@@ -36,7 +36,7 @@ export default function ContactFotm({ onChange }) {
     >
       <Form className={css.form}>
         <div className={css.wrapper}>
-          <label htmlFor={nameFieldId}>Username</label>
+          <label htmlFor={nameFieldId}>Name</label>
           <Field
             className={css.input}
             type="text"

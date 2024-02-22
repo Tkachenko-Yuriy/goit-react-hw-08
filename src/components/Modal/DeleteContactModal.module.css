@@ -1,0 +1,18 @@
+.container {
+  position: relative;
+  width: 300px;
+}
+
+.title {
+  text-align: center;
+}
+
+.text {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}

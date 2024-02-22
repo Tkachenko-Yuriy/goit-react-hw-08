@@ -1,5 +1,5 @@
 import Fuse from "fuse.js";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import { fetchContacts } from "../../redux/contacts/operations";

@@ -9,12 +9,14 @@
   border: 1px solid black;
   border-radius: 25px;
 }
+
 .wrapper {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
   width: 308px;
 }
+
 .input {
   width: 300px;
   background-color: inherit;
