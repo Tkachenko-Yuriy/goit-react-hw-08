@@ -17,4 +17,12 @@
   border: 1px solid black;
   border-radius: 10px;
   box-shadow: 7px 8px 21px -1px rgba(0, 0, 0, 0.75);
+  scale: 0.95;
+  transition-duration: 300ms;
+}
+
+.item:hover {
+  transition-duration: 500ms;
+  scale: 1;
+  box-shadow: 5px 5px 39px 7px rgb(247 244 12 / 80%);
 }
