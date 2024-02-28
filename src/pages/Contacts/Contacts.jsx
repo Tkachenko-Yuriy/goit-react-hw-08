@@ -10,6 +10,7 @@ import {
 } from "../../redux/contacts/operations";
 import { selectContacts } from "../../redux/contacts/selectors";
 import Title from "../../components/Title/Title";
+import DocumentTitle from "../../components/DocumentTitle";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import SearchBox from "../../components/SearchForm/SearchBox";
 import ContactList from "../../components/ContactList/ContactList/ContactList";
@@ -72,6 +73,7 @@ export default function Contacts() {
     >
       <Toaster />
       <Title text="Phonebook"></Title>
+      <DocumentTitle>Contacts</DocumentTitle>
       <ContactForm onChange={handleAddNewContact} />
       <SearchBox
         label="Find contacts by name or phone number"
