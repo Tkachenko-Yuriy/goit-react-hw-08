@@ -33,7 +33,7 @@ export default function App() {
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo="/login"
+                redirectTo="/contacts"
                 component={<RegisterPage />}
               />
             }
